@@ -10,8 +10,10 @@
 
 .header {
   min-width: 100vw;
-  padding: 20px 10px 20px 10px;
-  background-color: var(--mui-palette-secondary-main)
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  display: flex;
+  justify-content: center;
 }
 
 .title {
@@ -34,7 +36,6 @@
   padding: 2rem 0;
   justify-content: center;
   align-items: center;
-  background-color: var(--mui-palette-secondary-main)
 }
 
 .textButton {
