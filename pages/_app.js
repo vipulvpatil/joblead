@@ -1,10 +1,14 @@
 import "@/styles/globals.css"
-import Layout from "../components/layout"
+import {Experimental_CssVarsProvider as CssVarsProvider} from "@mui/material/styles"
+import Layout from "@/components/layout"
+import {theme} from "@/common/theme"
 
 export default function App({Component, pageProps}) {
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <CssVarsProvider theme={theme}>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </CssVarsProvider>
     )
 }

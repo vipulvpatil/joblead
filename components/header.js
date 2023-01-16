@@ -1,6 +1,6 @@
 import {Box, Grid, Typography} from "@mui/material"
 import Link from "next/link"
-import styles from "../styles/Home.module.css"
+import styles from "@/styles/Home.module.css"
 
 const Header = () => {
   return (
