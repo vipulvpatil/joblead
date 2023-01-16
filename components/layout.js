@@ -1,4 +1,5 @@
 import Header from "./header"
+import SubHeader from "./subheader"
 import {Typography} from "@mui/material"
 import styles from "@/styles/Home.module.css"
 
@@ -6,6 +7,7 @@ const Layout = ({children}) => {
   return (
     <div className={styles.container}>
       <Header />
+      <SubHeader />
       <main className={styles.main}>
         {children}
       </main>

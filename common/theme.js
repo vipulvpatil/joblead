@@ -6,7 +6,7 @@ export const theme = extendTheme({
     light: {
       palette: {
         primary: {
-          main: "#246EB9",
+          main: "#D35269",
           contrastText: "#333333",
         },
         secondary: {
@@ -15,9 +15,10 @@ export const theme = extendTheme({
         tertiary: {
           main: "#B9E3C6",
         },
-        error: {
-          main: "#333333",
-        },
+        text: {
+          // primary: "#B9E3C6",
+          secondary: "#F0B67F",
+        }
       },
     },
   },
