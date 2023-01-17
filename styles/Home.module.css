@@ -68,3 +68,10 @@
   width: 80vw;
   min-width: 350px;
 }
+
+.maxThreeLinesText {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
