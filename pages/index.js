@@ -1,14 +1,16 @@
 import {Box, Button, CircularProgress, Stack, Typography} from "@mui/material"
 import CreateIcon from "@mui/icons-material/Create"
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever"
-import UploadFile from "@/components/upload_file"
+import Joblist from "@/components/joblist"
+import UploadDiv from "@/components/upload_div"
 import styles from "@/styles/Home.module.css"
 
 const Index = () => {
   return (
     <>
-      <Stack direction="column">
-      <UploadFile/>
+      <Stack direction="column" sx={{alignItems: "center"}}>
+      <UploadDiv/>
+      <Joblist/>
       <Box>
         Blank Index page
         <br/><br/><br/>

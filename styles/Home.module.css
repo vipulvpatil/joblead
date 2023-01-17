@@ -47,7 +47,24 @@
 
 .uploadFileStack {
   border: 1px dashed var(--mui-palette-primary-main);
-  padding: 2rem;
+  padding: 1rem;
   min-width: 350px;
   align-items: center;
+}
+
+.uploadDiv {
+  width: 350px;
+}
+
+.card {
+  padding: 1rem 1.2rem;
+  border-radius: 5px;
+  background: var(--mui-palette-tertiary-main);
+  border: 1px solid var(--mui-palette-tertiary-main);
+}
+
+.joblist {
+  padding: 1rem 20px;
+  width: 80vw;
+  min-width: 350px;
 }

@@ -2,9 +2,9 @@ import {Button, Stack, Typography} from "@mui/material"
 import UploadIcon from "@mui/icons-material/Upload"
 import styles from "@/styles/Home.module.css"
 
-const UploadFile = () => {
+const UploadDiv = () => {
   return (
-    <div >
+    <div className={styles.uploadDiv}>
     <Stack direction="column" className={styles.uploadFileStack} spacing={2}>
       <Typography>Begin by uploading your resume.</Typography>
       <Button variant="contained" startIcon={<UploadIcon />} sx={{p:"auto"}}>
@@ -15,4 +15,4 @@ const UploadFile = () => {
   )
 }
 
-export default UploadFile
+export default UploadDiv

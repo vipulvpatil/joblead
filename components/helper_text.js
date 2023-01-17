@@ -1,9 +1,13 @@
-import {Divider} from "@mui/material"
+import {Divider, Typography} from "@mui/material"
 
 const HelperText = () => {
   return(
     <>
-      <Divider variant="middle">Find a job matching your resume</Divider>
+      <Divider variant="middle">
+        <Typography>
+          Find a job matching your resume
+        </Typography>
+      </Divider>
     </>
   )
 }
