@@ -1,5 +1,5 @@
 import formidable from "formidable"
-import fs from "fs"
+import mammoth from "mammoth"
 
 export const config = {
   api: {
@@ -7,16 +7,16 @@ export const config = {
   },
 }
 
-
 const ProcessResume = async (req, res) => {
   if(req.method !== "POST"){
     res.status(405).json({error: "method not allowed"})
   } else {
     const form = new formidable.IncomingForm()
-    form.parse(req, (err, fields, files) => {
-      console.log(files)
-
-      const data = fs.readFileSync(files["resume"].filepath, "utf8")
+    form.parse(req, async (err, fields, files) => {
+      const filepath = files["resume"].filepath
+      console.log(files["resume"].originalFilename)
+      
+      const data = await mammoth.extractRawText({path: filepath})
       console.log(data)
     })
 
