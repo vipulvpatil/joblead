@@ -1,4 +1,4 @@
-const ResumeUpload = async (req, res) => {
+const ProcessResume = async (req, res) => {
   if(req.method !== "POST"){
     res.status(405).json({error: "method not allowed"})
   } else {
@@ -7,4 +7,4 @@ const ResumeUpload = async (req, res) => {
   }
 }
 
-export default ResumeUpload
+export default ProcessResume
