@@ -95,3 +95,8 @@ a {
 }
 
 /* My custom styles */
+
+.MuiButton-contained {
+  margin-right: auto;
+  margin-left: auto;
+}

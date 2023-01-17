@@ -11,9 +11,9 @@ const SubHeader = () => {
 
   return (
     <Tabs value={value} onChange={onChange} centered>
-      <Tab label="Item One" />
-      <Tab label="Item Two" />
-      <Tab label="Item Three" />
+      <Tab label="Upload" />
+      <Tab label="LinkedIn" />
+      <Tab label="History" />
     </Tabs>
   )
 }

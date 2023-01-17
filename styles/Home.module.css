@@ -25,6 +25,8 @@
   min-width: 300px;
   overflow: hidden;
   padding-top: 2rem;
+  display: flex;
+  justify-content: center;
 }
 
 .footer {
@@ -41,4 +43,11 @@
 .textButton {
   padding: 0.5rem;
   color: var(--mui-palette-tertiary-main);
+}
+
+.uploadFileStack {
+  border: 1px dashed var(--mui-palette-primary-main);
+  padding: 2rem;
+  min-width: 350px;
+  align-items: center;
 }
