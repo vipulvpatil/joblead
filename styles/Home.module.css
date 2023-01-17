@@ -67,6 +67,7 @@
   padding: 1rem 20px;
   width: 80vw;
   min-width: 350px;
+  max-width: 50rem;
 }
 
 .maxThreeLinesText {
