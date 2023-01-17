@@ -100,3 +100,14 @@ a {
   margin-right: auto;
   margin-left: auto;
 }
+
+.MuiDivider-root {
+  color: var(--mui-palette-tertiary-main);
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.MuiDivider-root::before,
+.MuiDivider-root::after {
+  border-color: var(--mui-palette-tertiary-main);
+}
