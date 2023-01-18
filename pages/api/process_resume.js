@@ -7,19 +7,29 @@ export const config = {
   },
 }
 
+const formParseCallbackFunc = (res) => async (err, fields, files) => {
+  if (err){
+    res.status(400).json({error: err})
+  } else if (files && files["resume"]){
+    const {data, err} = await FileParser.parse(files["resume"])
+    if(data) {
+      res.status(200).json({result: data})
+    } else if(err) {
+      res.status(400).json({error: err})
+    } else {
+      res.status(500).json({error: "file parser failed"})
+    }
+  } else{
+    res.status(400).json({error: "resume file not found"})
+  }
+}
+
 const ProcessResume = async (req, res) => {
   if(req.method !== "POST"){
     res.status(405).json({error: "method not allowed"})
   } else {
     const form = new formidable.IncomingForm()
-    form.parse(req, async (err, fields, files) => {
-      if (files && files["resume"]){
-        FileParser.parse(files["resume"])
-      }
-    })
-
-    res.status(200)
-    res.json({result: "okay"})
+    form.parse(req, formParseCallbackFunc(res))
   }
 }
 
