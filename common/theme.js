@@ -1,26 +1,34 @@
 import {bodyFont, headerFont} from "@/common/font"
 import {experimental_extendTheme as extendTheme} from "@mui/material/styles"
 
+const colors = {
+  primaryColor: "#D35269",
+  backgroundColor: "#333333",
+  secondaryColor: "#B9E3C6",
+  tertiaryColor: "#71A9F7",
+  emergencyColor: "#F0B67F",
+}
+
 export const theme = extendTheme({
   colorSchemes: {
     light: {
       palette: {
         primary: {
-          main: "#D35269",
-          contrastText: "#333333",
+          main: colors.primaryColor,
+          contrastText: colors.backgroundColor,
         },
         secondary: {
-          main: "#333333",
+          main: colors.backgroundColor,
         },
         tertiary: {
-          main: "#B9E3C6",
+          main: colors.secondaryColor,
         },
         text: {
-          primary: "#333333",
-          secondary:  "#71A9F7",
+          primary: colors.backgroundColor,
+          secondary:  colors.tertiaryColor,
         },
         error: {
-          main: "#F0B67F"
+          main: colors.emergencyColor,
         }
       },
     },
