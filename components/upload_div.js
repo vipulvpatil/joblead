@@ -45,7 +45,7 @@ const UploadDiv = () => {
           onChange={onChange}
         />
       </Button>
-      <Typography variant="body2">{apiError}</Typography>
+      <Typography variant="body2" className={styles.error}>{apiError}</Typography>
     </Stack>
     </div>
   )

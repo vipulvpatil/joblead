@@ -16,8 +16,11 @@ export const theme = extendTheme({
           main: "#B9E3C6",
         },
         text: {
-          // primary: "#B9E3C6",
-          secondary: "#F0B67F",
+          primary: "#333333",
+          secondary:  "#71A9F7",
+        },
+        error: {
+          main: "#F0B67F"
         }
       },
     },

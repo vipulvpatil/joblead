@@ -7,7 +7,7 @@ const Jobcard = ({jobTitle, companyName, jobDescription}) => {
     <Card variant="outlined" className={styles.card}>
       <Typography variant="h4" noWrap={true}>{jobTitle}</Typography>
       <Typography variant="h5" noWrap={true}>{companyName}</Typography>
-      <Typography variant="body" className={`${styles.maxThreeLinesText} ${styles.jobDescription}`}>{jobDescription}</Typography>
+      <Typography variant="body" className={`${styles.limitedLinesText} ${styles.jobDescription}`}>{jobDescription}</Typography>
     </Card>
   )
 }

@@ -50,6 +50,7 @@
   padding: 1rem;
   min-width: 350px;
   align-items: center;
+  margin-bottom: 2rem;
 }
 
 .uploadDiv {
@@ -74,9 +75,14 @@
   margin-top: 1rem;
 }
 
-.maxThreeLinesText {
+.limitedLinesText {
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+.error {
+  color: var(--mui-palette-error-main);
+  text-align: center;
 }
