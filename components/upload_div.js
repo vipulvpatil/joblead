@@ -36,7 +36,7 @@ const UploadDiv = () => {
         Upload
         <input
           type="file"
-          accept="text/rtf,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+          accept="text/rtf,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
           hidden 
           onChange={onChange}
         />
