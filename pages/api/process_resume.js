@@ -14,7 +14,7 @@ const ProcessResume = async (req, res) => {
     const form = new formidable.IncomingForm()
     form.parse(req, async (err, fields, files) => {
       if (files && files["resume"]){
-        FileParser.identifyFileType(files["resume"])
+        FileParser.parse(files["resume"])
       }
     })
 
