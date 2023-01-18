@@ -1,8 +1,11 @@
 import {Button, Stack, Typography} from "@mui/material"
 import UploadIcon from "@mui/icons-material/Upload"
 import styles from "@/styles/Home.module.css"
+import {useState} from "react"
 
 const UploadDiv = () => {
+  const [apiError, setApiError] = useState("")
+
   const onChange = (event) => {
     if (!event.target.files?.length) {
       return
@@ -25,13 +28,14 @@ const UploadDiv = () => {
       method: "POST",
       body: formData,
     }, config)
-    console.log(await response.json())
+    const responseJson = await response.json()
+    setApiError(responseJson["error"])
   }
 
   return (
     <div className={styles.uploadDiv}>
     <Stack direction="column" className={styles.uploadFileStack} spacing={2}>
-      <Typography>Begin by uploading your resume.</Typography>
+      <Typography variant="body2">Begin by uploading your resume.</Typography>
       <Button component="label" variant="contained" startIcon={<UploadIcon />} sx={{p:"auto"}}>
         Upload
         <input
@@ -41,6 +45,7 @@ const UploadDiv = () => {
           onChange={onChange}
         />
       </Button>
+      <Typography variant="body2">{apiError}</Typography>
     </Stack>
     </div>
   )

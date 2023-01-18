@@ -14,7 +14,7 @@ const Layout = ({children}) => {
         {children}
       </main>
       <footer className={styles.footer}>
-        <Typography variant="subtitle1">
+        <Typography variant="footer">
           &#169; 2022-2023 Vipul Vinod Patil
         </Typography>
       </footer>

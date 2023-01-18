@@ -1,13 +1,9 @@
-import {Kumbh_Sans, Oswald, Rubik} from "@next/font/google"
+import {Inter, Josefin_Sans} from "@next/font/google"
 
-export const kumbhSans = Kumbh_Sans({
+export const headerFont = Josefin_Sans({
   subsets: ["latin"],
 })
 
-export const rubik = Rubik({
-  subsets: ["latin"],
-})
-
-export const oswald = Oswald({
+export const bodyFont = Inter({
   subsets: ["latin"],
 })

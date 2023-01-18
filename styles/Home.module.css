@@ -70,6 +70,10 @@
   max-width: 50rem;
 }
 
+.jobDescription {
+  margin-top: 1rem;
+}
+
 .maxThreeLinesText {
   display: -webkit-box;
   -webkit-line-clamp: 3;

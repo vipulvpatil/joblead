@@ -4,7 +4,7 @@ const HelperText = () => {
   return(
     <>
       <Divider variant="middle">
-        <Typography>
+        <Typography variant="subtitle">
           Find a job matching your resume
         </Typography>
       </Divider>
