@@ -1,5 +1,7 @@
 import FileParser from "@/lib/file_parser"
+import {buildPersona} from "@/lib/persona_builder"
 import formidable from "formidable"
+import {resumeAnalysis} from "@/lib/openai"
 
 export const config = {
   api: {
@@ -8,12 +10,19 @@ export const config = {
 }
 
 const formParseCallbackFunc = (res) => async (err, fields, files) => {
-  if (err){
+  if (err) {
     res.status(400).json({error: err})
   } else if (files && files["resume"]){
     const {data, err} = await FileParser.parse(files["resume"])
     if(data) {
-      res.status(200).json({result: data})
+      try {
+        const aiResponse = await resumeAnalysis(data)
+        const persona = await buildPersona(aiResponse)
+        res.status(200).json({result: persona})
+      } catch(err) {
+        console.log(err)
+        res.status(400).json({error: err})
+      }
     } else if(err) {
       res.status(400).json({error: err})
     } else {
