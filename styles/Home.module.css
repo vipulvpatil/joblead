@@ -86,3 +86,11 @@
   color: var(--mui-palette-error-main);
   text-align: center;
 }
+
+.subheader {
+  padding-bottom: 2rem;
+}
+
+.hidden {
+  display: none;
+}

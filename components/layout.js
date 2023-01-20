@@ -1,6 +1,5 @@
 import Header from "./header"
 import HelperText from "./helper_text"
-import SubHeader from "./subheader"
 import {Typography} from "@mui/material"
 import styles from "@/styles/Home.module.css"
 
@@ -9,7 +8,6 @@ const Layout = ({children}) => {
     <div className={styles.container}>
       <Header />
       <HelperText />
-      <SubHeader />
       <main className={styles.main}>
         {children}
       </main>
