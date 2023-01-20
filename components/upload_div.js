@@ -33,7 +33,6 @@ const UploadDiv = () => {
   }
 
   return (
-    <div className={styles.uploadDiv}>
     <Stack direction="column" className={styles.uploadFileStack} spacing={2}>
       <Typography variant="body2">Begin by uploading your resume.</Typography>
       <Button component="label" variant="contained" startIcon={<UploadIcon />} sx={{p:"auto"}}>
@@ -47,7 +46,6 @@ const UploadDiv = () => {
       </Button>
       <Typography variant="body2" className={styles.error}>{apiError}</Typography>
     </Stack>
-    </div>
   )
 }
 

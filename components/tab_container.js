@@ -15,9 +15,9 @@ const TabContainer = ({children}) => {
     const newChilden = children.map(child => {
       index++
       if (index != value) {
-        return <div className={styles.hidden} key={child.key}>child</div>
+        return <div className={styles.hidden} key={child.key}>{child}</div>
       }
-      return child
+      return <div key={child.key}>{child}</div>
     })
     setProcessedChildren(newChilden)
   }, [children, value])
@@ -28,7 +28,9 @@ const TabContainer = ({children}) => {
       <Tab label={<Typography variant="tab">Persona</Typography>} />
       <Tab label={<Typography variant="tab">Help</Typography>} />
     </Tabs>
-    {processedChildren}
+    <div className={styles.tabContent}>
+      {processedChildren}
+    </div>
   </>
 }
 

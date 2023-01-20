@@ -45,16 +45,14 @@
   color: var(--mui-palette-tertiary-main);
 }
 
-.uploadFileStack {
+.tabContent {
   border: 1px dashed var(--mui-palette-primary-main);
   padding: 1rem;
   min-width: 350px;
-  align-items: center;
-  margin-bottom: 2rem;
 }
 
-.uploadDiv {
-  width: 350px;
+.uploadFileStack {
+  align-items: center;
 }
 
 .card {
