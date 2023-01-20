@@ -46,13 +46,18 @@
 }
 
 .tabContent {
+  transition: height ease 1s;
   border: 1px dashed var(--mui-palette-primary-main);
   padding: 1rem;
-  min-width: 350px;
+  width: 350px;
 }
 
 .uploadFileStack {
   align-items: center;
+}
+
+.personaStack {
+  text-align: center;
 }
 
 .card {
@@ -87,8 +92,4 @@
 
 .subheader {
   padding-bottom: 2rem;
-}
-
-.hidden {
-  display: none;
 }

@@ -1,5 +1,5 @@
-import FileParser from "@/lib/file_parser"
 import {analyseResume, buildPersona} from "@/lib/persona_builder"
+import FileParser from "@/lib/file_parser"
 import formidable from "formidable"
 
 export const config = {
@@ -32,7 +32,7 @@ const formParseCallbackFunc = (res) => async (err, fields, files) => {
   }
 }
 
-const ProcessResume = async (req, res) => {
+const AnalyseResume = async (req, res) => {
   if(req.method !== "POST"){
     res.status(405).json({error: "method not allowed"})
   } else {
@@ -41,4 +41,4 @@ const ProcessResume = async (req, res) => {
   }
 }
 
-export default ProcessResume
+export default AnalyseResume

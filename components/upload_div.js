@@ -24,7 +24,7 @@ const UploadDiv = () => {
       },
     }
 
-    const response = await fetch("/api/process_resume", {
+    const response = await fetch("/api/analyse_resume", {
       method: "POST",
       body: formData,
     }, config)
