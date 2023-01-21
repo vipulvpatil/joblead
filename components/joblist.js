@@ -9,7 +9,7 @@ const Joblist = ({jobs}) => {
         <Jobcard 
           title={job.title}
           company={job.company}
-          description={job.description}
+          date={job.date}
           locations={job.locations}
           salary={job.salary}
           url={job.url}
