@@ -5,7 +5,7 @@ import PersonaDiv from "@/components/persona_div"
 import UploadDiv from "@/components/upload_div"
 import styles from "@/styles/Home.module.css"
 
-const TabContainer = () => {
+const TabContainer = ({setJobs}) => {
   const [tabContent, setTabContent] = useState(<UploadDiv/>)
   const [value, setValue] = useState(0)
   const [personaData, setPersonaData] = useState(null)
@@ -43,7 +43,6 @@ const TabContainer = () => {
   }
 
   const search = async() => {
-    // const url = "http://public.api.careerjet.net/search?"
     const url = "/api/search_job?"
     const query = {
       localeCode: "en_US",
@@ -57,10 +56,10 @@ const TabContainer = () => {
     try{
       setSearchApiStatus("pending")
       const response = await fetch(url+ new URLSearchParams(query))
-      console.log(response)
       const responseJson = await response.json()
-      setSearchApiError(null)
+      setSearchApiError(responseJson["error"])
       console.log(responseJson)
+      setJobs(responseJson["result"]["jobs"])
       setSearchApiStatus("complete")
     } catch(err) {
       console.log(err)
