@@ -59,6 +59,10 @@ export const theme = extendTheme({
       fontSize: 20,
       fontStyle: "italic",
     },
+    h6: {
+      fontFamily: headerFont.style.fontFamily,
+      fontSize: 18,
+    },
     body: {
       fontFamily: bodyFont.style.fontFamily,
       fontSize: 20,

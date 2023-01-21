@@ -99,3 +99,11 @@
   color: var(--mui-palette-error-main);
   margin-left: 1rem;
 }
+
+.personaDataTitle {
+  color: var(--mui-palette-primary-main);
+}
+
+.personaDataValue {
+  color: var(--mui-palette-tertiary-main);
+}

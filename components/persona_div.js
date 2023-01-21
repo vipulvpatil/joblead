@@ -1,29 +1,48 @@
 import {Stack, Typography} from "@mui/material"
 import styles from "@/styles/Home.module.css"
 
-const PersonaDataItemLine = ({personaDataValue}) => {
+const PersonaDataItemSingleValue = ({title, personaDataValue}) => {
   if(personaDataValue){
-    return <Typography variant="body2">{personaDataValue}</Typography>
+    return (
+      <>
+        <Typography variant="h5" className={styles.personaDataTitle}>{title}</Typography>
+        <Typography variant="body2" className={styles.personaDataValue}>{personaDataValue}</Typography>
+      </>
+    )
+  }
+  return null
+}
+
+const PersonaDataItemMultipleValues = ({title, personaDataValues}) => {
+  if(personaDataValues && personaDataValues.length > 0){
+    return (
+      <>
+        <Typography variant="h5" className={styles.personaDataTitle}>{title}</Typography>
+        {
+          personaDataValues.slice(0,3).map((personaDataValue, index) => {
+            return <Typography variant="body2" className={styles.personaDataValue} key={index}>*{personaDataValue}</Typography>
+          })
+        }  
+      </>
+    )
   }
   return null
 }
 
 const PersonaDiv = ({personaData}) => {
   let displayJsx = <Typography variant="body2">Persona not found. Please begin by uploading a resume.</Typography>
-
   if(personaData) {
     displayJsx = (
       <>
-        <PersonaDataItemLine personaDataValue={personaData["name"]}/>
-        <PersonaDataItemLine personaDataValue={personaData["email"]}/>
-        <PersonaDataItemLine personaDataValue={personaData["mobile"]}/>
-        <PersonaDataItemLine personaDataValue={personaData["city"]}/>
-        <PersonaDataItemLine personaDataValue={personaData["state"]}/>
-        <PersonaDataItemLine personaDataValue={personaData["country"]}/>
-        <PersonaDataItemLine personaDataValue={personaData["missing"]}/>
-        <PersonaDataItemLine personaDataValue={personaData["technical"]}/>
-        <PersonaDataItemLine personaDataValue={personaData["soft"]}/>
-        <PersonaDataItemLine personaDataValue={personaData["jobs"]}/>
+        <PersonaDataItemSingleValue title="Name" personaDataValue={personaData["name"]}/>
+        <PersonaDataItemSingleValue title="Email" personaDataValue={personaData["email"]}/>
+        <PersonaDataItemSingleValue title="Mobile" personaDataValue={personaData["mobile"]}/>
+        <PersonaDataItemSingleValue title="City" personaDataValue={personaData["city"]}/>
+        <PersonaDataItemSingleValue title="State" personaDataValue={personaData["state"]}/>
+        <PersonaDataItemSingleValue title="Country" personaDataValue={personaData["country"]}/>
+        <PersonaDataItemMultipleValues title="Technical Skills" personaDataValues={personaData["technical"]}/>
+        <PersonaDataItemMultipleValues title="Soft Skills" personaDataValues={personaData["soft"]}/>
+        <PersonaDataItemMultipleValues title="Recommended job positions" personaDataValues={personaData["jobs"]}/>
       </>
     )
   }
