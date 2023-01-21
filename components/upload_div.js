@@ -3,14 +3,14 @@ import {useEffect, useState} from "react"
 import UploadIcon from "@mui/icons-material/Upload"
 import styles from "@/styles/Home.module.css"
 
-const UploadDiv = ({onChange, apiError, uploadStatus}) => {
+const UploadDiv = ({onChange, apiError, apiStatus}) => {
   const [statusJsx, setStatusJsx] = useState(null)
 
   useEffect(() => {
-    if(uploadStatus === "pending"){
+    if(apiStatus === "pending"){
       setStatusJsx(<Typography variant="body2" className={styles.error}>analysing resume<CircularProgress size={18} className={styles.resumeProgress}/></Typography>)
     } else {
-      if(uploadStatus === "complete"){
+      if(apiStatus === "complete"){
         if(apiError){
           setStatusJsx(<Typography variant="body2" className={styles.error}>{apiError}</Typography>)
         } else {
@@ -18,13 +18,13 @@ const UploadDiv = ({onChange, apiError, uploadStatus}) => {
         }
       }
     }
-  }, [apiError, uploadStatus])
+  }, [apiError, apiStatus])
   
 
   return (
     <Stack direction="column" className={styles.uploadFileStack} spacing={2}>
       <Typography variant="body2">Begin by uploading your resume.</Typography>
-      <Button component="label" variant="contained" disabled={uploadStatus === "pending"} startIcon={<UploadIcon />} sx={{p:"auto"}}>
+      <Button component="label" variant="contained" disabled={apiStatus === "pending"} startIcon={<UploadIcon />} sx={{p:"auto"}}>
         Upload
         <input
           type="file"

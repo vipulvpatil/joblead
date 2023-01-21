@@ -1,5 +1,6 @@
 import {Tab, Tabs, Typography} from "@mui/material"
 import {useEffect, useState} from "react"
+import AboutDiv from "@/components/about_div"
 import PersonaDiv from "@/components/persona_div"
 import UploadDiv from "@/components/upload_div"
 import styles from "@/styles/Home.module.css"
@@ -7,9 +8,11 @@ import styles from "@/styles/Home.module.css"
 const TabContainer = () => {
   const [tabContent, setTabContent] = useState(<UploadDiv/>)
   const [value, setValue] = useState(0)
-  const [apiError, setApiError] = useState(null)
   const [personaData, setPersonaData] = useState(null)
-  const [apiStatus, setApiStatus] = useState(null)
+  const [resumeApiError, setResumeApiError] = useState(null)
+  const [resumeApiStatus, setResumeApiStatus] = useState(null)
+  const [searchApiError, setSearchApiError] = useState(null)
+  const [searchApiStatus, setSearchApiStatus] = useState(null)
 
   const onTabChange = (e, newValue) => {
     setValue(newValue)
@@ -26,19 +29,19 @@ const TabContainer = () => {
       },
     }
     try{
-      setApiStatus("pending")
+      setResumeApiStatus("pending")
       const response = await fetch("/api/analyse_resume", {
         method: "POST",
         body: formData,
       }, config)
       const responseJson = await response.json()
-      setApiError(responseJson["error"])
+      setResumeApiError(responseJson["error"])
       setPersonaData(responseJson["result"])
-      setApiStatus("complete")
+      setResumeApiStatus("complete")
     } catch(err) {
       console.log(err)
-      setApiError("error analysing resume")
-      setApiStatus("complete")
+      setResumeApiError("error analysing resume")
+      setResumeApiStatus("complete")
     }
   }
 
@@ -50,18 +53,24 @@ const TabContainer = () => {
       uploadResume(event.target.files[0])
     }
 
+    const onSearchClick = () => {
+      console.log("What is up?")
+      setSearchApiError("no error")
+      setSearchApiStatus("no status")
+    }
+
     switch(value) {
       case 0:
-        setTabContent(<UploadDiv onChange={onFileSelectChange} apiError={apiError} uploadStatus={apiStatus}/>)
+        setTabContent(<UploadDiv onChange={onFileSelectChange} apiError={resumeApiError} apiStatus={resumeApiStatus}/>)
         break
       case 1:
         setTabContent(<PersonaDiv personaData={personaData}/>)
         break
       case 2:
-        setTabContent(<div>3</div>)
+        setTabContent(<AboutDiv onClick={onSearchClick} apiError={searchApiError} apiStatus={searchApiStatus}/>)
         break
     }
-  }, [value, apiError, personaData, apiStatus])
+  }, [value, resumeApiError, personaData, resumeApiStatus, searchApiError, searchApiStatus])
 
   return <>
     <Tabs value={value} onChange={onTabChange} centered className={styles.subheader}>
