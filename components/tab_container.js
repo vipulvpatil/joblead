@@ -24,9 +24,6 @@ const TabContainer = () => {
 
     const config = {
       headers: {"content-type": "multipart/form-data"},
-      onUploadProgress: (event) => {
-        console.log("Current progress:", Math.round((event.loaded * 100) / event.total))
-      },
     }
     try{
       setResumeApiStatus("pending")
@@ -45,6 +42,33 @@ const TabContainer = () => {
     }
   }
 
+  const search = async() => {
+    // const url = "http://public.api.careerjet.net/search?"
+    const url = "/api/search_job?"
+    const query = {
+      localeCode: "en_US",
+      affid: "95a5757afc5d25b39970d6d5e368f5d3",
+      userIp: "49.37.168.142",
+      userAgent: window.navigator.userAgent,
+      keywords : "sales executive",
+      location : "San Francisco",
+    }
+    
+    try{
+      setSearchApiStatus("pending")
+      const response = await fetch(url+ new URLSearchParams(query))
+      console.log(response)
+      const responseJson = await response.json()
+      setSearchApiError(null)
+      console.log(responseJson)
+      setSearchApiStatus("complete")
+    } catch(err) {
+      console.log(err)
+      setSearchApiError("error searching")
+      setSearchApiStatus("complete")
+    }
+  }
+
   useEffect(() => {
     const onFileSelectChange = (event) => {
       if (!event.target.files?.length) {
@@ -55,8 +79,7 @@ const TabContainer = () => {
 
     const onSearchClick = () => {
       console.log("What is up?")
-      setSearchApiError("no error")
-      setSearchApiStatus("no status")
+      search()
     }
 
     switch(value) {
