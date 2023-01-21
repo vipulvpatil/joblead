@@ -14,15 +14,16 @@ const PersonaDiv = ({personaData}) => {
   if(personaData) {
     displayJsx = (
       <>
-        <PersonaDataItemLine personaDataValue={personaData["Name"]}/>
-        <PersonaDataItemLine personaDataValue={personaData["Email"]}/>
-        <PersonaDataItemLine personaDataValue={personaData["Mobile"]}/>
-        <PersonaDataItemLine personaDataValue={personaData["City"]}/>
-        <PersonaDataItemLine personaDataValue={personaData["State"]}/>
-        <PersonaDataItemLine personaDataValue={personaData["Top 5 technical skills that are not in this profile"]}/>
-        <PersonaDataItemLine personaDataValue={personaData["Top 5 technical skills present in this profile"]}/>
-        <PersonaDataItemLine personaDataValue={personaData["Top 5 soft skills present in this profile"]}/>
-        <PersonaDataItemLine personaDataValue={personaData["Top 5 suitable designations when applying for a job"]}/>
+        <PersonaDataItemLine personaDataValue={personaData["name"]}/>
+        <PersonaDataItemLine personaDataValue={personaData["email"]}/>
+        <PersonaDataItemLine personaDataValue={personaData["mobile"]}/>
+        <PersonaDataItemLine personaDataValue={personaData["city"]}/>
+        <PersonaDataItemLine personaDataValue={personaData["state"]}/>
+        <PersonaDataItemLine personaDataValue={personaData["country"]}/>
+        <PersonaDataItemLine personaDataValue={personaData["missing"]}/>
+        <PersonaDataItemLine personaDataValue={personaData["technical"]}/>
+        <PersonaDataItemLine personaDataValue={personaData["soft"]}/>
+        <PersonaDataItemLine personaDataValue={personaData["jobs"]}/>
       </>
     )
   }
