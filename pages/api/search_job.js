@@ -20,17 +20,22 @@ const SearchJob = async (req, res) => {
   if(req.method !== "GET"){
     res.status(405).json({error: "method not allowed"})
   } else {
+    const userIp = req.ip
     const {
       localeCode, 
-      affid, 
-      userIp, 
+      affid,
       userAgent,
       keywords,
-      location,
     } = req.query
 
+    let {location} = req.query
+
+    if(!location){
+      location = req.geo.city
+    }
+
     try {
-      if(localeCode && affid && userIp && userAgent && keywords && location) {
+      if(localeCode && affid && userIp && userAgent && keywords) {
         const responseJson = await careerJetSearch(localeCode, affid, userIp, userAgent, keywords, location)
         res.status(200).json({result: responseJson})
       } else {

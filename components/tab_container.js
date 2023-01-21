@@ -42,15 +42,20 @@ const TabContainer = ({setJobs}) => {
     }
   }
 
-  const search = async() => {
+  const searchJobs = async(persona) => {
+    if (!persona) {
+      setSearchApiError("Persona not found. Please begin by uploading a resume.")
+      setSearchApiStatus("complete")
+      return
+    }
     const url = "/api/search_job?"
     const query = {
       localeCode: "en_US",
       affid: "95a5757afc5d25b39970d6d5e368f5d3",
       userIp: "49.37.168.142",
       userAgent: window.navigator.userAgent,
-      keywords : "sales executive",
-      location : "San Francisco",
+      keywords : persona["technical"][0],
+      location : persona["city"],
     }
     
     try{
@@ -59,12 +64,13 @@ const TabContainer = ({setJobs}) => {
       const responseJson = await response.json()
       setSearchApiError(responseJson["error"])
       console.log(responseJson)
-      setJobs(responseJson["result"]["jobs"])
       setSearchApiStatus("complete")
+      return responseJson["result"]["jobs"]
     } catch(err) {
       console.log(err)
       setSearchApiError("error searching")
       setSearchApiStatus("complete")
+      return null
     }
   }
 
@@ -76,9 +82,11 @@ const TabContainer = ({setJobs}) => {
       uploadResume(event.target.files[0])
     }
 
-    const onSearchClick = () => {
-      console.log("What is up?")
-      search()
+    const onSearchClick = async () => {
+      const jobResults = await searchJobs(personaData)
+      if(jobResults) {
+        setJobs(jobResults)
+      }
     }
 
     switch(value) {
@@ -92,7 +100,7 @@ const TabContainer = ({setJobs}) => {
         setTabContent(<AboutDiv onClick={onSearchClick} apiError={searchApiError} apiStatus={searchApiStatus}/>)
         break
     }
-  }, [value, resumeApiError, personaData, resumeApiStatus, searchApiError, searchApiStatus])
+  }, [value, resumeApiError, personaData, resumeApiStatus, searchApiError, searchApiStatus, setJobs])
 
   return <>
     <Tabs value={value} onChange={onTabChange} centered className={styles.subheader}>
