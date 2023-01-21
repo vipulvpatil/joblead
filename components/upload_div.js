@@ -1,4 +1,4 @@
-import {Button, Stack, Typography} from "@mui/material"
+import {Button, CircularProgress, Stack, Typography} from "@mui/material"
 import {useEffect, useState} from "react"
 import UploadIcon from "@mui/icons-material/Upload"
 import styles from "@/styles/Home.module.css"
@@ -8,13 +8,13 @@ const UploadDiv = ({onChange, apiError, uploadStatus}) => {
 
   useEffect(() => {
     if(uploadStatus === "pending"){
-      setStatusJsx(<Typography variant="body2" className={styles.error}>pending</Typography>)
+      setStatusJsx(<Typography variant="body2" className={styles.error}>analysing resume<CircularProgress size={18} className={styles.resumeProgress}/></Typography>)
     } else {
       if(uploadStatus === "complete"){
         if(apiError){
           setStatusJsx(<Typography variant="body2" className={styles.error}>{apiError}</Typography>)
         } else {
-          setStatusJsx(<Typography variant="body2" className={styles.error}>complete</Typography>)
+          setStatusJsx(<Typography variant="body2" className={styles.error}>persona is ready</Typography>)
         }
       }
     }

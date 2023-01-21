@@ -87,8 +87,15 @@
 .error {
   color: var(--mui-palette-error-main);
   text-align: center;
+  display: flex;
+  align-items: center;
 }
 
 .subheader {
   padding-bottom: 2rem;
+}
+
+.resumeProgress {
+  color: var(--mui-palette-error-main);
+  margin-left: 1rem;
 }
