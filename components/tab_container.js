@@ -9,6 +9,7 @@ const TabContainer = () => {
   const [value, setValue] = useState(0)
   const [apiError, setApiError] = useState(null)
   const [personaData, setPersonaData] = useState(null)
+  const [apiStatus, setApiStatus] = useState(null)
 
   const onTabChange = (e, newValue) => {
     setValue(newValue)
@@ -24,14 +25,21 @@ const TabContainer = () => {
         console.log("Current progress:", Math.round((event.loaded * 100) / event.total))
       },
     }
-
-    const response = await fetch("/api/analyse_resume", {
-      method: "POST",
-      body: formData,
-    }, config)
-    const responseJson = await response.json()
-    setApiError(responseJson["error"])
-    setPersonaData(responseJson["result"])
+    try{
+      setApiStatus("pending")
+      const response = await fetch("/api/analyse_resume", {
+        method: "POST",
+        body: formData,
+      }, config)
+      const responseJson = await response.json()
+      setApiError(responseJson["error"])
+      setPersonaData(responseJson["result"])
+      setApiStatus("complete")
+    } catch(err) {
+      console.log(err)
+      setApiError("error analysing resume")
+      setApiStatus("complete")
+    }
   }
 
   useEffect(() => {
@@ -44,7 +52,7 @@ const TabContainer = () => {
 
     switch(value) {
       case 0:
-        setTabContent(<UploadDiv onChange={onFileSelectChange} apiError={apiError}/>)
+        setTabContent(<UploadDiv onChange={onFileSelectChange} apiError={apiError} uploadStatus={apiStatus}/>)
         break
       case 1:
         setTabContent(<PersonaDiv personaData={personaData}/>)
@@ -53,7 +61,7 @@ const TabContainer = () => {
         setTabContent(<div>3</div>)
         break
     }
-  }, [value, apiError, personaData])
+  }, [value, apiError, personaData, apiStatus])
 
   return <>
     <Tabs value={value} onChange={onTabChange} centered className={styles.subheader}>

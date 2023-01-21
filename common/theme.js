@@ -29,6 +29,10 @@ export const theme = extendTheme({
         },
         error: {
           main: colors.emergencyColor,
+        },
+        action: {
+          disabled: `${colors.backgroundColor}5C`,
+          disabledBackground: `${colors.primaryColor}5C`
         }
       },
     },
