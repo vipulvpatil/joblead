@@ -7,7 +7,6 @@ import styles from "@/styles/Home.module.css"
 const TabContainer = () => {
   const [tabContent, setTabContent] = useState(<UploadDiv/>)
   const [value, setValue] = useState(0)
-  const [height, setHeight] = useState("150px")
 
   const onChange = (e, newValue) => {
     setValue(newValue)
@@ -27,24 +26,13 @@ const TabContainer = () => {
     }
   }, [value])
 
-  useEffect(() => {
-    switch(value) {
-      case 0:
-        setHeight("150px")
-        break
-      case 1:
-        setHeight("200px")
-        break
-    }
-  }, [value])
-
   return <>
     <Tabs value={value} onChange={onChange} centered className={styles.subheader}>
       <Tab label={<Typography variant="tab">Upload</Typography>} />
       <Tab label={<Typography variant="tab">Persona</Typography>} />
       <Tab label={<Typography variant="tab">About</Typography>} />
     </Tabs>
-    <div className={styles.tabContent} style={{height:height}}>
+    <div className={styles.tabContent}>
       {tabContent}
     </div>
   </>

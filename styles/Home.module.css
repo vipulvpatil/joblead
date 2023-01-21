@@ -46,7 +46,6 @@
 }
 
 .tabContent {
-  transition: height ease 1s;
   border: 1px dashed var(--mui-palette-primary-main);
   padding: 1rem;
   width: 350px;
