@@ -7,7 +7,8 @@ import styles from "@/styles/Home.module.css"
 const TabContainer = () => {
   const [tabContent, setTabContent] = useState(<UploadDiv/>)
   const [value, setValue] = useState(0)
-  const [apiError, setApiError] = useState("")
+  const [apiError, setApiError] = useState(null)
+  const [personaData, setPersonaData] = useState(null)
 
   const onTabChange = (e, newValue) => {
     setValue(newValue)
@@ -30,6 +31,7 @@ const TabContainer = () => {
     }, config)
     const responseJson = await response.json()
     setApiError(responseJson["error"])
+    setPersonaData(responseJson["result"])
   }
 
   useEffect(() => {
@@ -45,13 +47,13 @@ const TabContainer = () => {
         setTabContent(<UploadDiv onChange={onFileSelectChange} apiError={apiError}/>)
         break
       case 1:
-        setTabContent(<PersonaDiv/>)
+        setTabContent(<PersonaDiv personaData={personaData}/>)
         break
       case 2:
         setTabContent(<div>3</div>)
         break
     }
-  }, [value, apiError])
+  }, [value, apiError, personaData])
 
   return <>
     <Tabs value={value} onChange={onTabChange} centered className={styles.subheader}>
