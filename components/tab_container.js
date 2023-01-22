@@ -3,6 +3,7 @@ import {useEffect, useState} from "react"
 import AboutDiv from "@/components/about_div"
 import PersonaDiv from "@/components/persona_div"
 import UploadDiv from "@/components/upload_div"
+import findJobs from "@/lib/find_jobs"
 import styles from "@/styles/Home.module.css"
 
 const TabContainer = ({setJobs}) => {
@@ -42,37 +43,7 @@ const TabContainer = ({setJobs}) => {
     }
   }
 
-  const searchJobs = async(persona) => {
-    if (!persona) {
-      setSearchApiError("Persona not found. Please begin by uploading a resume.")
-      setSearchApiStatus("complete")
-      return
-    }
-    const url = "/api/search_job?"
-    const query = {
-      localeCode: "en_US",
-      affid: "95a5757afc5d25b39970d6d5e368f5d3",
-      userIp: "49.37.168.142",
-      userAgent: window.navigator.userAgent,
-      keywords : persona["technical"][0],
-      location : persona["city"],
-    }
-    
-    try{
-      setSearchApiStatus("pending")
-      const response = await fetch(url+ new URLSearchParams(query))
-      const responseJson = await response.json()
-      setSearchApiError(responseJson["error"])
-      console.log(responseJson)
-      setSearchApiStatus("complete")
-      return responseJson["result"]["jobs"]
-    } catch(err) {
-      console.log(err)
-      setSearchApiError("error searching")
-      setSearchApiStatus("complete")
-      return null
-    }
-  }
+  
 
   useEffect(() => {
     const onFileSelectChange = (event) => {
@@ -83,9 +54,12 @@ const TabContainer = ({setJobs}) => {
     }
 
     const onSearchClick = async () => {
-      const jobResults = await searchJobs(personaData)
-      if(jobResults) {
-        setJobs(jobResults)
+      setSearchApiStatus("pending")
+      const jobResults = await findJobs(personaData)
+      setSearchApiError(jobResults.error)
+      setSearchApiStatus(jobResults.status)
+      if(jobResults.result) {
+        setJobs(jobResults.result)
       }
     }
 
