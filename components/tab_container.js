@@ -3,7 +3,7 @@ import {useEffect, useState} from "react"
 import AboutDiv from "@/components/about_div"
 import PersonaDiv from "@/components/persona_div"
 import UploadDiv from "@/components/upload_div"
-import findJobs from "@/lib/find_jobs"
+import findJobsForPersona from "@/lib/find_jobs"
 import styles from "@/styles/Home.module.css"
 
 const TabContainer = ({setJobs}) => {
@@ -55,7 +55,7 @@ const TabContainer = ({setJobs}) => {
 
     const onSearchClick = async () => {
       setSearchApiStatus("pending")
-      const jobResults = await findJobs(personaData)
+      const jobResults = await findJobsForPersona(personaData)
       setSearchApiError(jobResults.error)
       setSearchApiStatus(jobResults.status)
       if(jobResults.result) {
