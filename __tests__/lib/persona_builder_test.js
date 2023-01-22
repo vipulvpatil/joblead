@@ -1,4 +1,3 @@
-import assert from "assert"
 import {buildPersona} from "../../lib/persona_builder"
 
 describe("buildPersona", () => {

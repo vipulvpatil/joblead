@@ -7,12 +7,14 @@ const Joblist = ({jobs}) => {
     return (
       <Grid item mobile={12} key={index}>
         <Jobcard 
+          id={job.id}
           title={job.title}
           company={job.company}
           date={job.date}
           locations={job.locations}
           salary={job.salary}
           url={job.url}
+          matchCount={job.matchCount}
         />
       </Grid>
     )
