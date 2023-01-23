@@ -9,6 +9,8 @@ const Header = () => {
         src="/jobleadnewlogo.png" 
         alt="JOB LEAD logo"
         width={114} height={98}
+        placeholder="blur"
+        blurDataURL={"/jobleadnewlogo.png"}
       />
     </div>
   )
