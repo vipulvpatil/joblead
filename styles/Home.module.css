@@ -112,3 +112,21 @@
 .personaDataValue {
   color: var(--mui-palette-tertiary-main);
 }
+
+.jobListStatus {
+  color: var(--mui-palette-tertiary-main);
+  justify-content: center;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  margin: 2rem;
+}
+
+.jobListProgress {
+  color: var(--mui-palette-tertiary-main);
+  margin-left: 1rem;
+}
+
+.recommendedText {
+  color: var(--mui-palette-primary-main);
+}

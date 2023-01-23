@@ -9,6 +9,11 @@ const Jobcard = ({title, company, date, locations, salary, url, weight}) => {
   const userLocale = getUserLocale()
   const displayDate = localDate.toLocaleDateString(userLocale, {options})
 
+  let recommendedJsx = null
+  if(weight > 20) {
+    recommendedJsx = <Typography variant="h6" className={styles.recommendedText}>Recommended</Typography>
+  }
+
   return (
     <a target="_blank" href={url} rel="noopener noreferrer">
       <Card variant="outlined" className={styles.card}>
@@ -17,7 +22,7 @@ const Jobcard = ({title, company, date, locations, salary, url, weight}) => {
         <Typography variant="body" className={`${styles.limitedLinesText} ${styles.jobDescription}`}>{salary}</Typography>
         <Typography variant="body" className={`${styles.limitedLinesText} ${styles.jobDescription}`}>{locations}</Typography>
         <Typography variant="h6">Posted at: {displayDate}</Typography>
-        <Typography variant="h6">weight: {weight}</Typography>
+        {recommendedJsx}
       </Card>
     </a>
   )

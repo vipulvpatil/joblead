@@ -4,13 +4,12 @@ import TabContainer from "@/components/tab_container"
 import {useState} from "react"
 
 const Index = () => {
-  const [jobs, setJobs] = useState([])
-
+  const [personaData, setPersonaData] = useState(null)
 
   return (
     <Stack direction="column" sx={{alignItems: "center"}}>
-      <TabContainer setJobs={setJobs}/>
-      <Joblist jobs={jobs}/>
+      <TabContainer personaData={personaData} setPersonaData={setPersonaData}/>
+      <Joblist personaData={personaData}/>
     </Stack>
   )
 }
