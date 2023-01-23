@@ -6,9 +6,9 @@ const Header = () => {
   return (
     <div className={styles.header}>
       <Image 
-        src="/jobleadlogo.png" 
+        src="/jobleadnewlogo.png" 
         alt="JOB LEAD logo"
-        width={226} height={65}
+        width={114} height={98}
       />
     </div>
   )

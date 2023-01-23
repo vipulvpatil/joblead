@@ -14,7 +14,7 @@ const UploadDiv = ({onChange, apiError, apiStatus}) => {
         if(apiError){
           setStatusJsx(<Typography variant="body2" className={styles.error}>{apiError}</Typography>)
         } else {
-          setStatusJsx(<Typography variant="body2" className={styles.error}>persona is ready</Typography>)
+          setStatusJsx(<Typography variant="body2" className={styles.error}>persona created from resume</Typography>)
         }
       }
     }

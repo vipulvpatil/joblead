@@ -111,3 +111,7 @@ a {
 .MuiDivider-root::after {
   border-color: var(--mui-palette-tertiary-main);
 }
+
+.MuiButton-contained {
+  background-color: var(--mui-palette-tertiary-main);
+}

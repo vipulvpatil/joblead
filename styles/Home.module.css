@@ -40,13 +40,8 @@
   align-items: center;
 }
 
-.textButton {
-  padding: 0.5rem;
-  color: var(--mui-palette-tertiary-main);
-}
-
 .tabContent {
-  border: 1px dashed var(--mui-palette-primary-main);
+  border: 1px dashed var(--mui-palette-tertiary-main);
   padding: 1rem;
   width: 350px;
 }
@@ -128,5 +123,5 @@
 }
 
 .recommendedText {
-  color: var(--mui-palette-primary-main);
+  color: var(--mui-palette-error-main);
 }

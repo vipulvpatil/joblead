@@ -2,11 +2,11 @@ import {bodyFont, headerFont} from "@/common/font"
 import {experimental_extendTheme as extendTheme} from "@mui/material/styles"
 
 const colors = {
-  primaryColor: "#D35269",
+  primaryColor: "#FFCBBC",  
   backgroundColor: "#333333",
-  secondaryColor: "#B9E3C6",
-  tertiaryColor: "#71A9F7",
-  emergencyColor: "#F0B67F",
+  secondaryColor: "#FFFFFF",
+  tertiaryColor: "#FDAD95",
+  emergencyColor: "#E4572E",
 }
 
 export const theme = extendTheme({
