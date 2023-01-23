@@ -4120,7 +4120,7 @@ prompts@^2.0.1:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.6.2, prop-types@^15.8.1:
+prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -4168,6 +4168,13 @@ react-dom@18.2.0:
   dependencies:
     loose-envify "^1.1.0"
     scheduler "^0.23.0"
+
+react-html-comment@^2.0.16:
+  version "2.0.16"
+  resolved "https://registry.yarnpkg.com/react-html-comment/-/react-html-comment-2.0.16.tgz#fc2f2248384c85101e911d8d632cda55d13d48ea"
+  integrity sha512-LeSpUoSxH5nVMkZ4YZJgOKIKWYWlPaBpfP9SCupIjTAopu/xxYf4SvtvKYfGlv2SvAv8uYSiK0kP+eBKX5nE5g==
+  dependencies:
+    prop-types "^15.7.2"
 
 react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"
