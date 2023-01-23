@@ -14,7 +14,7 @@ const Joblist = ({jobs}) => {
           locations={job.locations}
           salary={job.salary}
           url={job.url}
-          matchCount={job.matchCount}
+          weight={job.weight}
         />
       </Grid>
     )
