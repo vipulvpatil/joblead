@@ -16,8 +16,13 @@ const formParseCallbackFunc = (res) => async (err, fields, files) => {
     if(data) {
       try {
         const analysedResume = await analyseResume(data)
-        const persona = await buildPersona(analysedResume)
-        res.status(200).json({result: persona})
+        if(analysedResume){
+          const persona = await buildPersona(analysedResume)
+          res.status(200).json({result: persona})
+        } else {
+          res.status(400).json({error: "errored while analyzing resume"})
+        }
+        
       } catch(err) {
         console.log(err)
         res.status(400).json({error: err})
