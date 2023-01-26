@@ -5,6 +5,8 @@ import PersonaDiv from "@/components/persona_div"
 import UploadDiv from "@/components/upload_div"
 import styles from "@/styles/Home.module.css"
 
+const MaxResumeFileSize = 524288
+
 const TabContainer = ({personaData, setPersonaData}) => {
   const [tabContent, setTabContent] = useState(<UploadDiv/>)
   const [value, setValue] = useState(0)
@@ -17,6 +19,12 @@ const TabContainer = ({personaData, setPersonaData}) => {
 
   useEffect(() => {
     const uploadResume = async(resumeFile) => {
+      if(resumeFile.size > MaxResumeFileSize) {
+        setResumeApiError("Resume size too big. Max size: "+MaxResumeFileSize/1024+" mb")
+        setResumeApiStatus("complete")
+        return
+      }
+
       const formData = new FormData()
       formData.append("resume", resumeFile)
   
