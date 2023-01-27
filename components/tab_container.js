@@ -1,6 +1,7 @@
 import {Tab, Tabs, Typography} from "@mui/material"
 import {useEffect, useState} from "react"
 import AboutDiv from "@/components/about_div"
+import CityConfirmationDialog from "@/components/city_confirmation_dialog"
 import PersonaDiv from "@/components/persona_div"
 import UploadDiv from "@/components/upload_div"
 import styles from "@/styles/Home.module.css"
@@ -12,10 +13,18 @@ const TabContainer = ({personaData, setPersonaData}) => {
   const [value, setValue] = useState(0)
   const [resumeApiError, setResumeApiError] = useState(null)
   const [resumeApiStatus, setResumeApiStatus] = useState(null)
+  const [cityConfirmationDialogOpen, setCityConfirmationDialogOpen] = useState(false)
+  const [resumeAnalysisResult, setResumeAnalysisResult] = useState(null)
   
   const onTabChange = (e, newValue) => {
     setValue(newValue)
   }
+
+  useEffect(() => {
+    if(resumeAnalysisResult) {
+      setCityConfirmationDialogOpen(true)
+    }
+  }, [resumeAnalysisResult])
 
   useEffect(() => {
     const uploadResume = async(resumeFile) => {
@@ -39,7 +48,7 @@ const TabContainer = ({personaData, setPersonaData}) => {
         }, config)
         const responseJson = await response.json()
         setResumeApiError(responseJson["error"])
-        setPersonaData(responseJson["result"])
+        setResumeAnalysisResult(responseJson["result"])
         setResumeApiStatus("complete")
       } catch(err) {
         console.log(err)
@@ -68,6 +77,13 @@ const TabContainer = ({personaData, setPersonaData}) => {
     }
   }, [value, resumeApiError, personaData, resumeApiStatus, setPersonaData])
 
+  const handleConfirmationDialogClose = () => {
+    console.log(resumeAnalysisResult.city)
+    setPersonaData(resumeAnalysisResult)
+    setResumeAnalysisResult(null)
+    setCityConfirmationDialogOpen(false)
+  }
+
   return <>
     <Tabs value={value} onChange={onTabChange} centered className={styles.subheader}>
       <Tab label={<Typography variant="tab">Upload</Typography>} />
@@ -77,6 +93,7 @@ const TabContainer = ({personaData, setPersonaData}) => {
     <div className={styles.tabContent}>
       {tabContent}
     </div>
+    <CityConfirmationDialog open={cityConfirmationDialogOpen} handleClose={handleConfirmationDialogClose}/>
   </>
 }
 
