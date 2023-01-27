@@ -112,6 +112,8 @@ a {
   border-color: var(--mui-palette-tertiary-main);
 }
 
-.MuiButton-contained {
-  background-color: var(--mui-palette-tertiary-main);
+.MuiDialogContentText-root,
+.MuiInputLabel-root,
+.MuiFormHelperText-root {
+  color: var(--mui-palette-secondary-main);
 }

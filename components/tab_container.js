@@ -13,20 +13,25 @@ const TabContainer = ({personaData, setPersonaData}) => {
   const [value, setValue] = useState(0)
   const [resumeApiError, setResumeApiError] = useState(null)
   const [resumeApiStatus, setResumeApiStatus] = useState(null)
-  const [cityConfirmationDialogOpen, setCityConfirmationDialogOpen] = useState(false)
+  const [selectedCity, setSelectedCity] = useState(null)
   const [resumeAnalysisResult, setResumeAnalysisResult] = useState(null)
+  const [cityConfirmationDialogOpen, setCityConfirmationDialogOpen] = useState(false)
+  
   
   const onTabChange = (e, newValue) => {
     setValue(newValue)
   }
 
   useEffect(() => {
-    if(resumeAnalysisResult) {
+    const handleResumeUploadResponse = (responseJson) => {
+      setResumeApiError(responseJson["error"])
+      setResumeAnalysisResult(responseJson["result"])
+      const cityInResponse = responseJson["result"]?.city
+      setResumeApiStatus("complete")
+      setSelectedCity(cityInResponse)
       setCityConfirmationDialogOpen(true)
     }
-  }, [resumeAnalysisResult])
 
-  useEffect(() => {
     const uploadResume = async(resumeFile) => {
       if(resumeFile.size > MaxResumeFileSize) {
         setResumeApiError("Resume size too big. Max size: "+MaxResumeFileSize/1024+" mb")
@@ -47,9 +52,7 @@ const TabContainer = ({personaData, setPersonaData}) => {
           body: formData,
         }, config)
         const responseJson = await response.json()
-        setResumeApiError(responseJson["error"])
-        setResumeAnalysisResult(responseJson["result"])
-        setResumeApiStatus("complete")
+        handleResumeUploadResponse(responseJson)
       } catch(err) {
         console.log(err)
         setResumeApiError("error analysing resume")
@@ -75,12 +78,14 @@ const TabContainer = ({personaData, setPersonaData}) => {
         setTabContent(<AboutDiv/>)
         break
     }
-  }, [value, resumeApiError, personaData, resumeApiStatus, setPersonaData])
+  }, [value, resumeApiError, personaData, resumeApiStatus])
 
-  const handleConfirmationDialogClose = () => {
-    console.log(resumeAnalysisResult.city)
-    setPersonaData(resumeAnalysisResult)
-    setResumeAnalysisResult(null)
+
+  const handleCityConfirmationDialogClose = () => {
+    if(resumeAnalysisResult) {
+      setPersonaData(Object.assign(resumeAnalysisResult, {selectedCity}))
+      setResumeAnalysisResult(null)
+    }
     setCityConfirmationDialogOpen(false)
   }
 
@@ -93,7 +98,12 @@ const TabContainer = ({personaData, setPersonaData}) => {
     <div className={styles.tabContent}>
       {tabContent}
     </div>
-    <CityConfirmationDialog open={cityConfirmationDialogOpen} handleClose={handleConfirmationDialogClose}/>
+    <CityConfirmationDialog 
+      open={cityConfirmationDialogOpen}
+      selectedCity={selectedCity}
+      setSelectedCity={setSelectedCity}
+      handleClose={handleCityConfirmationDialogClose}
+    />
   </>
 }
 

@@ -1,26 +1,36 @@
-import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@mui/material"
+import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField} from "@mui/material"
 
-const CityConfirmationDialog = ({open, handleClose}) => {
+const CityConfirmationDialog = ({open, selectedCity, setSelectedCity, handleClose}) => {
+  const handleCityChanged = (e) => {
+    setSelectedCity(e.target.value)
+  }
+  
   return (
     <Dialog
         open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
+        aria-labelledby="confirm-city-dialog-title"
+        aria-describedby="confirm-city-dialog-description"
       >
-      <DialogTitle id="alert-dialog-title">
-        {"Use Google's location service?"}
+      <DialogTitle id="confirm-city-dialog-title" typography={"h4"} sx={{textAlign: "center"}}>
+        Confirm city for job search
       </DialogTitle>
       <DialogContent>
-        <DialogContentText id="alert-dialog-description">
-          Let Google help apps determine location. This means sending anonymous
-          location data to Google, even when no apps are running.
+        <DialogContentText id="confirm-city-dialog-description">
+          <TextField 
+            id="confirm-city-text-field" 
+            label="City"
+            variant="outlined"
+            defaultValue={selectedCity}
+            helperText="Please confirm or update as per your preference"
+            sx={{m:"0.5rem"}}
+            color="secondary"
+            onChange={handleCityChanged}
+          />
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose}>Disagree</Button>
-        <Button onClick={handleClose} autoFocus>
-          Agree
+        <Button onClick={handleClose} autoFocus variant="contained">
+          Proceed
         </Button>
       </DialogActions>
     </Dialog>

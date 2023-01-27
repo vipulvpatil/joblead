@@ -37,11 +37,9 @@ const PersonaDiv = ({personaData}) => {
         <PersonaDataItemSingleValue title="Name" personaDataValue={personaData["name"]}/>
         <PersonaDataItemSingleValue title="Email" personaDataValue={personaData["email"]}/>
         <PersonaDataItemSingleValue title="Mobile" personaDataValue={personaData["mobile"]}/>
-        <PersonaDataItemSingleValue title="City" personaDataValue={personaData["city"]}/>
-        <PersonaDataItemSingleValue title="State" personaDataValue={personaData["state"]}/>
-        <PersonaDataItemSingleValue title="Country" personaDataValue={personaData["country"]}/>
-        <PersonaDataItemMultipleValues title="Technical Skills" personaDataValues={personaData["technical"]}/>
-        <PersonaDataItemMultipleValues title="Soft Skills" personaDataValues={personaData["soft"]}/>
+        <PersonaDataItemSingleValue title="City" personaDataValue={personaData["selectedCity"]}/>
+        <PersonaDataItemMultipleValues title="Top Technical Skills" personaDataValues={personaData["technical"]}/>
+        <PersonaDataItemMultipleValues title="Top Soft Skills" personaDataValues={personaData["soft"]}/>
         <PersonaDataItemMultipleValues title="Recommended job positions" personaDataValues={personaData["jobs"]}/>
       </>
     )
