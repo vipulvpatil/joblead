@@ -108,6 +108,10 @@
   color: var(--mui-palette-tertiary-main);
 }
 
+.spacingDiv {
+  height: 1rem;
+}
+
 .jobListStatus {
   color: var(--mui-palette-tertiary-main);
   justify-content: center;
