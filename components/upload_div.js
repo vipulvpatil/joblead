@@ -3,28 +3,25 @@ import {useEffect, useState} from "react"
 import UploadIcon from "@mui/icons-material/Upload"
 import styles from "@/styles/Home.module.css"
 
-const UploadDiv = ({onChange, apiError, apiStatus}) => {
+const UploadDiv = ({onChange, personaBuilderMessage, personaBuilderStatus}) => {
   const [statusJsx, setStatusJsx] = useState(null)
 
   useEffect(() => {
-    if(apiStatus === "pending"){
+    if(personaBuilderStatus === "pending"){
       setStatusJsx(<Typography variant="body2" className={styles.error}>analysing resume<CircularProgress size={18} className={styles.resumeProgress}/></Typography>)
     } else {
-      if(apiStatus === "complete"){
-        if(apiError){
-          setStatusJsx(<Typography variant="body2" className={styles.error}>{apiError}</Typography>)
-        } else {
-          setStatusJsx(<Typography variant="body2" className={styles.error}>persona created from resume</Typography>)
-        }
+      if(personaBuilderStatus === "complete"){
+        const message = personaBuilderMessage || "persona created from resume"
+        setStatusJsx(<Typography variant="body2" className={styles.error}>{message}</Typography>)
       }
     }
-  }, [apiError, apiStatus])
+  }, [personaBuilderMessage, personaBuilderStatus])
   
 
   return (
     <Stack direction="column" className={styles.uploadFileStack} spacing={2}>
       <Typography variant="body2">Begin by uploading your resume.</Typography>
-      <Button component="label" variant="contained" disabled={apiStatus === "pending"} startIcon={<UploadIcon />} sx={{p:"auto"}}>
+      <Button component="label" variant="contained" disabled={personaBuilderStatus === "pending"} startIcon={<UploadIcon />} sx={{p:"auto"}}>
         Upload
         <input
           type="file"

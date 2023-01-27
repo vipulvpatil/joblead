@@ -4,38 +4,45 @@ import AboutDiv from "@/components/about_div"
 import CityConfirmationDialog from "@/components/city_confirmation_dialog"
 import PersonaDiv from "@/components/persona_div"
 import UploadDiv from "@/components/upload_div"
+import {savePersona} from "@/lib/local_storage"
 import styles from "@/styles/Home.module.css"
 
 const MaxResumeFileSize = 524288
 
-const TabContainer = ({personaData, setPersonaData}) => {
+const TabContainer = ({personaData, setPersonaData, personaLoadedMessage}) => {
   const [tabContent, setTabContent] = useState(<UploadDiv/>)
   const [value, setValue] = useState(0)
-  const [resumeApiError, setResumeApiError] = useState(null)
-  const [resumeApiStatus, setResumeApiStatus] = useState(null)
+  const [personaBuilderMessage, setPersonaBuilderMessage] = useState(null)
+  const [personaBuilderStatus, setPersonaBuilderStatus] = useState(null)
   const [selectedCity, setSelectedCity] = useState(null)
   const [resumeAnalysisResult, setResumeAnalysisResult] = useState(null)
   const [cityConfirmationDialogOpen, setCityConfirmationDialogOpen] = useState(false)
-  
   
   const onTabChange = (e, newValue) => {
     setValue(newValue)
   }
 
   useEffect(() => {
+    if(personaLoadedMessage) {
+      setPersonaBuilderStatus("complete")
+      setPersonaBuilderMessage(personaLoadedMessage)
+    }
+  }, [personaLoadedMessage])
+    
+  useEffect(() => {
     const handleResumeUploadResponse = (responseJson) => {
-      setResumeApiError(responseJson["error"])
+      setPersonaBuilderMessage(responseJson["error"])
       setResumeAnalysisResult(responseJson["result"])
       const cityInResponse = responseJson["result"]?.city
-      setResumeApiStatus("complete")
+      setPersonaBuilderStatus("complete")
       setSelectedCity(cityInResponse)
       setCityConfirmationDialogOpen(true)
     }
 
     const uploadResume = async(resumeFile) => {
       if(resumeFile.size > MaxResumeFileSize) {
-        setResumeApiError("Resume size too big. Max size: "+MaxResumeFileSize/1024+" mb")
-        setResumeApiStatus("complete")
+        setPersonaBuilderMessage("Resume size too big. Max size: "+MaxResumeFileSize/1024+" mb")
+        setPersonaBuilderStatus("complete")
         return
       }
 
@@ -46,7 +53,7 @@ const TabContainer = ({personaData, setPersonaData}) => {
         headers: {"content-type": "multipart/form-data"},
       }
       try{
-        setResumeApiStatus("pending")
+        setPersonaBuilderStatus("pending")
         const response = await fetch("/api/analyse_resume", {
           method: "POST",
           body: formData,
@@ -55,8 +62,8 @@ const TabContainer = ({personaData, setPersonaData}) => {
         handleResumeUploadResponse(responseJson)
       } catch(err) {
         console.log(err)
-        setResumeApiError("error analysing resume")
-        setResumeApiStatus("complete")
+        setPersonaBuilderMessage("error analysing resume")
+        setPersonaBuilderStatus("complete")
       }
     }
 
@@ -69,7 +76,13 @@ const TabContainer = ({personaData, setPersonaData}) => {
 
     switch(value) {
       case 0:
-        setTabContent(<UploadDiv onChange={onFileSelectChange} apiError={resumeApiError} apiStatus={resumeApiStatus}/>)
+        setTabContent(
+          <UploadDiv
+            onChange={onFileSelectChange}
+            personaBuilderMessage={personaBuilderMessage}
+            personaBuilderStatus={personaBuilderStatus}
+          />
+        )
         break
       case 1:
         setTabContent(<PersonaDiv personaData={personaData}/>)
@@ -78,12 +91,16 @@ const TabContainer = ({personaData, setPersonaData}) => {
         setTabContent(<AboutDiv/>)
         break
     }
-  }, [value, resumeApiError, personaData, resumeApiStatus])
+  }, [value, personaBuilderMessage, personaData, personaBuilderStatus])
 
+  const saveAndSetPersonaData = (data) => {
+    savePersona(data)
+    setPersonaData(data)
+  }
 
   const handleCityConfirmationDialogClose = () => {
     if(resumeAnalysisResult) {
-      setPersonaData(Object.assign(resumeAnalysisResult, {selectedCity}))
+      saveAndSetPersonaData(Object.assign(resumeAnalysisResult, {selectedCity}))
       setResumeAnalysisResult(null)
     }
     setCityConfirmationDialogOpen(false)
