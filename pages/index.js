@@ -10,7 +10,7 @@ const Index = () => {
   const [personaLoadedFromStorage, setPersonaLoadedFromStorage] = useState(null)
   const [openPersonaLoaderDialog, setOpenPersonaLoaderDialog] = useState(false)
   const [personaLoadedMessage, setPersonaLoadedMessage] = useState("")
-
+  
   useEffect(() => {
     setPersonaLoadedFromStorage(loadPersona())
   }, [])

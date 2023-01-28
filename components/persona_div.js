@@ -57,7 +57,8 @@ const PersonaDiv = ({personaData, setPersonaData}) => {
   }, [personaData])
 
   const handleCityConfirmationDialogClose = () => {
-    const data = Object.assign(personaData, {selectedCity})
+    const data = {...personaData}
+    Object.assign(data, {selectedCity})
     savePersona(data)
     setPersonaData(data)
     setCityConfirmationDialogOpen(false)
