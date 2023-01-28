@@ -17,6 +17,10 @@ const PersonaDataItemSingleValue = ({title, personaDataValue, editFunc}) => {
         <EditIcon/>
       </Button>
     )
+
+    if(!personaDataValue || personaDataValue === ""){
+      personaDataValue = "*nil"
+    }
   }
 
   if(personaDataValue){
