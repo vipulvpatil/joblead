@@ -1,6 +1,7 @@
 import {analyseResume, buildPersona} from "@/lib/persona_builder"
 import FileParser from "@/lib/file_parser"
 import formidable from "formidable"
+import fs from "fs"
 
 export const config = {
   api: {
@@ -13,6 +14,7 @@ const formParseCallbackFunc = (res) => async (err, fields, files) => {
     res.status(400).json({error: err})
   } else if (files && files["resume"]){
     const {data, err} = await FileParser.parse(files["resume"])
+    fs.unlinkSync(files["resume"].filepath)
     if(data) {
       try {
         const analysedResume = await analyseResume(data)
