@@ -1,11 +1,28 @@
-import {Stack, Typography} from "@mui/material"
+import {Button, Stack, Typography} from "@mui/material"
+import {useEffect, useState} from "react"
+import CityConfirmationDialog from "@/components/city_confirmation_dialog"
+import EditIcon from "@mui/icons-material/Edit"
+import {savePersona} from "@/lib/local_storage"
 import styles from "@/styles/Home.module.css"
 
-const PersonaDataItemSingleValue = ({title, personaDataValue}) => {
+const PersonaDataItemSingleValue = ({title, personaDataValue, editFunc}) => {
+  let editButtonJsx = <></>
+  if(editFunc){
+    editButtonJsx = (
+      <Button
+        variant="contained" 
+        className={styles.smallButton}
+        onClick={editFunc}
+      >
+        <EditIcon/>
+      </Button>
+    )
+  }
+
   if(personaDataValue){
     return (
       <>
-        <Typography variant="h5" className={styles.personaDataTitle}>{title}</Typography>
+        <Typography variant="h5" className={`${styles.personaDataTitle} ${styles.personaDataDiv}`}>{title}{editButtonJsx}</Typography>
         <Typography variant="body2" className={styles.personaDataValue}>{personaDataValue}</Typography>
       </>
     )
@@ -29,7 +46,23 @@ const PersonaDataItemMultipleValues = ({title, personaDataValues}) => {
   return null
 }
 
-const PersonaDiv = ({personaData}) => {
+const PersonaDiv = ({personaData, setPersonaData}) => {
+  const [cityConfirmationDialogOpen, setCityConfirmationDialogOpen] = useState(false)
+  const [selectedCity, setSelectedCity] = useState(null)
+
+  useEffect(() => {
+    if(personaData) {
+      setSelectedCity(personaData["selectedCity"])
+    }
+  }, [personaData])
+
+  const handleCityConfirmationDialogClose = () => {
+    const data = Object.assign(personaData, {selectedCity})
+    savePersona(data)
+    setPersonaData(data)
+    setCityConfirmationDialogOpen(false)
+  }
+
   let displayJsx = <Typography variant="body2">Persona not found. Please begin by uploading a resume.</Typography>
   if(personaData) {
     displayJsx = (
@@ -37,7 +70,7 @@ const PersonaDiv = ({personaData}) => {
         <PersonaDataItemSingleValue title="Name" personaDataValue={personaData["name"]}/><div className={styles.spacingDiv}/>
         <PersonaDataItemSingleValue title="Email" personaDataValue={personaData["email"]}/><div className={styles.spacingDiv}/>
         <PersonaDataItemSingleValue title="Mobile" personaDataValue={personaData["mobile"]}/><div className={styles.spacingDiv}/>
-        <PersonaDataItemSingleValue title="City" personaDataValue={personaData["selectedCity"]}/><div className={styles.spacingDiv}/>
+        <PersonaDataItemSingleValue title="City" personaDataValue={selectedCity} editFunc={() => {setCityConfirmationDialogOpen(true)}}/><div className={styles.spacingDiv}/>
         <PersonaDataItemMultipleValues title="Top Technical Skills" personaDataValues={personaData["technical"]}/><div className={styles.spacingDiv}/>
         <PersonaDataItemMultipleValues title="Top Soft Skills" personaDataValues={personaData["soft"]}/><div className={styles.spacingDiv}/>
         <PersonaDataItemMultipleValues title="Recommended job positions" personaDataValues={personaData["jobs"]}/><div className={styles.spacingDiv}/>
@@ -46,9 +79,17 @@ const PersonaDiv = ({personaData}) => {
   }
 
   return (
-    <Stack direction="column" className={styles.personaStack}>
-      {displayJsx}
-    </Stack>
+    <>
+      <Stack direction="column" className={styles.personaStack}>
+        {displayJsx}
+      </Stack>
+      <CityConfirmationDialog
+        open={cityConfirmationDialogOpen}
+        selectedCity={selectedCity}
+        setSelectedCity={setSelectedCity}
+        handleClose={handleCityConfirmationDialogClose}
+      />
+    </>
   )
 }
 

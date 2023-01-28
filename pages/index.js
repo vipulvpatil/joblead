@@ -19,13 +19,13 @@ const Index = () => {
     setOpenPersonaLoaderDialog(!!personaLoadedFromStorage)
   }, [personaLoadedFromStorage])
 
-  const continuePersonaLoding = () => {
+  const continuePersonaLoading = () => {
     setPersonaData(personaLoadedFromStorage)
     setPersonaLoadedMessage("persona loaded from storage")
     setOpenPersonaLoaderDialog(false)
   }
 
-  const skipPersonaLoding = () => {
+  const skipPersonaLoading = () => {
     setOpenPersonaLoaderDialog(false)
   }
 
@@ -35,7 +35,7 @@ const Index = () => {
         <TabContainer personaData={personaData} setPersonaData={setPersonaData} personaLoadedMessage={personaLoadedMessage}/>
         <Joblist personaData={personaData}/>
       </Stack>
-      <LoadingPersonaConfirmationDialog open={openPersonaLoaderDialog} handleContinue={continuePersonaLoding} handleSkip={skipPersonaLoding}/>
+      <LoadingPersonaConfirmationDialog open={openPersonaLoaderDialog} handleContinue={continuePersonaLoading} handleSkip={skipPersonaLoading}/>
     </>
   )
 }

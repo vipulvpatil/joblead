@@ -129,3 +129,16 @@
 .recommendedText {
   color: var(--mui-palette-error-main);
 }
+
+.smallButton {
+  height: 30px;
+  width: 10px;
+  min-width: 10px;
+  margin-left: 10px;
+}
+
+.personaDataDiv {
+  display: flex;
+  align-items: center;
+  margin: auto;
+}

@@ -85,13 +85,13 @@ const TabContainer = ({personaData, setPersonaData, personaLoadedMessage}) => {
         )
         break
       case 1:
-        setTabContent(<PersonaDiv personaData={personaData}/>)
+        setTabContent(<PersonaDiv personaData={personaData} setPersonaData={setPersonaData}/>)
         break
       case 2:
         setTabContent(<AboutDiv/>)
         break
     }
-  }, [value, personaBuilderMessage, personaData, personaBuilderStatus])
+  }, [value, personaBuilderMessage, personaData, setPersonaData, personaBuilderStatus])
 
   const saveAndSetPersonaData = (data) => {
     savePersona(data)
