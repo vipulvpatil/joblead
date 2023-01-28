@@ -19,7 +19,7 @@ const PersonaDataItemSingleValue = ({title, personaDataValue, editFunc}) => {
     )
 
     if(!personaDataValue || personaDataValue === ""){
-      personaDataValue = "*nil"
+      personaDataValue = "*city not selected"
     }
   }
 
@@ -41,7 +41,7 @@ const PersonaDataItemMultipleValues = ({title, personaDataValues}) => {
         <Typography variant="h5" className={styles.personaDataTitle}>{title}</Typography>
         {
           personaDataValues.slice(0,3).map((personaDataValue, index) => {
-            return <Typography variant="body2" className={styles.personaDataValue} key={index}>*{personaDataValue}</Typography>
+            return <Typography variant="body2" className={styles.personaDataValue} key={index}>{personaDataValue}</Typography>
           })
         }  
       </>
