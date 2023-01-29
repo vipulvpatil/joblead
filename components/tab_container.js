@@ -4,6 +4,7 @@ import AboutDiv from "@/components/about_div"
 import CityConfirmationDialog from "@/components/city_confirmation_dialog"
 import PersonaDiv from "@/components/persona_div"
 import UploadDiv from "@/components/upload_div"
+import {logAnalyticsEvent} from "@/lib/analytics_events"
 import {savePersona} from "@/lib/local_storage"
 import styles from "@/styles/Home.module.css"
 
@@ -76,6 +77,7 @@ const TabContainer = ({personaData, setPersonaData, personaLoadedMessage}) => {
 
     switch(value) {
       case 0:
+        logAnalyticsEvent(window, "OpenedUploadTabEvent")
         setTabContent(
           <UploadDiv
             onChange={onFileSelectChange}
@@ -85,6 +87,7 @@ const TabContainer = ({personaData, setPersonaData, personaLoadedMessage}) => {
         )
         break
       case 1:
+        logAnalyticsEvent(window, "OpenedPersonaTabEvent")
         setTabContent(
           <PersonaDiv
             personaData={personaData}
@@ -93,6 +96,7 @@ const TabContainer = ({personaData, setPersonaData, personaLoadedMessage}) => {
         )
         break
       case 2:
+        logAnalyticsEvent(window, "OpenedAboutTabEvent")
         setTabContent(<AboutDiv/>)
         break
     }
