@@ -2,6 +2,7 @@ import {Button, Stack, Typography} from "@mui/material"
 import {useEffect, useState} from "react"
 import CityConfirmationDialog from "@/components/city_confirmation_dialog"
 import EditIcon from "@mui/icons-material/Edit"
+import {logAnalyticsEvent} from "@/lib/analytics_events"
 import {savePersona} from "@/lib/local_storage"
 import styles from "@/styles/Home.module.css"
 
@@ -65,6 +66,7 @@ const PersonaDiv = ({personaData, setPersonaData}) => {
     Object.assign(data, {selectedCity})
     savePersona(data)
     setPersonaData(data)
+    logAnalyticsEvent(window, "CityConfirmedEvent", {selectedCity: selectedCity})
     setCityConfirmationDialogOpen(false)
   }
 

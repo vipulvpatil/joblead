@@ -20,6 +20,17 @@ const TabContainer = ({personaData, setPersonaData, personaLoadedMessage}) => {
   const [cityConfirmationDialogOpen, setCityConfirmationDialogOpen] = useState(false)
   
   const onTabChange = (e, newValue) => {
+    switch(newValue) {
+      case 0:
+        logAnalyticsEvent(window, "UploadTabOpenedEvent")
+        break
+      case 1:
+        logAnalyticsEvent(window, "PersonaTabOpenedEvent")
+        break
+      case 2:
+        logAnalyticsEvent(window, "AboutTabOpenedEvent")
+        break
+    }
     setValue(newValue)
   }
 
@@ -72,12 +83,12 @@ const TabContainer = ({personaData, setPersonaData, personaLoadedMessage}) => {
       if (!event.target.files?.length) {
         return
       }
+      logAnalyticsEvent(window, "ResumeUploadedEvent")
       uploadResume(event.target.files[0])
     }
 
     switch(value) {
       case 0:
-        logAnalyticsEvent(window, "OpenedUploadTabEvent")
         setTabContent(
           <UploadDiv
             onChange={onFileSelectChange}
@@ -87,7 +98,6 @@ const TabContainer = ({personaData, setPersonaData, personaLoadedMessage}) => {
         )
         break
       case 1:
-        logAnalyticsEvent(window, "OpenedPersonaTabEvent")
         setTabContent(
           <PersonaDiv
             personaData={personaData}
@@ -96,7 +106,6 @@ const TabContainer = ({personaData, setPersonaData, personaLoadedMessage}) => {
         )
         break
       case 2:
-        logAnalyticsEvent(window, "OpenedAboutTabEvent")
         setTabContent(<AboutDiv/>)
         break
     }
@@ -112,6 +121,7 @@ const TabContainer = ({personaData, setPersonaData, personaLoadedMessage}) => {
       saveAndSetPersonaData(Object.assign(resumeAnalysisResult, {selectedCity}))
       setResumeAnalysisResult(null)
     }
+    logAnalyticsEvent(window, "CityConfirmedEvent", {selectedCity: selectedCity})
     setCityConfirmationDialogOpen(false)
   }
 

@@ -1,8 +1,9 @@
+import {CircularProgress, Grid, Typography} from "@mui/material"
 import {useEffect, useState} from "react"
 import Jobcard from "@/components/jobcard"
 import findJobsForPersona from "@/lib/find_jobs"
+import {logAnalyticsEvent} from "@/lib/analytics_events"
 import styles from "@/styles/Home.module.css"
-const {Grid, Typography, CircularProgress} = require("@mui/material")
 
 const Joblist = ({personaData}) => {
   const [searchApiError, setSearchApiError] = useState(null)
@@ -20,7 +21,10 @@ const Joblist = ({personaData}) => {
         setJobs(jobResults.result)
       }
     }
-    searchJobs()
+    if(personaData){
+      logAnalyticsEvent(window, "JobSearchedEvent", {selectedCity: personaData["selectedCity"]})
+      searchJobs()
+    }
   }, [personaData])
 
   useEffect(() => {
@@ -43,24 +47,36 @@ const Joblist = ({personaData}) => {
           </Grid>
         )
       } else {
-        setResultantJsx(
-          jobs.map((job, index) => {
-            return (
-              <Grid item mobile={12} key={index}>
-                <Jobcard 
-                  id={job.id}
-                  title={job.title}
-                  company={job.company}
-                  date={job.date}
-                  locations={job.locations}
-                  salary={job.salary}
-                  url={job.url}
-                  weight={job.weight}
-                />
-              </Grid>
-            )
-          })
-        )
+        logAnalyticsEvent(window, "JobsDisplayedEvent", {jobCount: jobs.length})
+        if(jobs.length === 0){
+          setResultantJsx(
+            <Grid item mobile={12}>
+              <Typography variant="h4" className={styles.jobListStatus}>
+                {"no jobs found. :("}
+              </Typography>
+            </Grid>
+          )
+        }
+        else {
+          setResultantJsx(
+            jobs.map((job, index) => {
+              return (
+                <Grid item mobile={12} key={index}>
+                  <Jobcard 
+                    id={job.id}
+                    title={job.title}
+                    company={job.company}
+                    date={job.date}
+                    locations={job.locations}
+                    salary={job.salary}
+                    url={job.url}
+                    weight={job.weight}
+                  />
+                </Grid>
+              )
+            })
+          )
+        }
       }
     } else {
       setResultantJsx(
