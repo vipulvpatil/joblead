@@ -19,7 +19,7 @@ const UploadDiv = ({onChange, personaBuilderMessage, personaBuilderStatus}) => {
   
 
   return (
-    <Stack direction="column" className={styles.uploadFileStack} spacing={2}>
+    <Stack id = "uploadTab" direction="column" className={styles.uploadFileStack} spacing={2}>
       <Typography variant="body2">Begin by uploading your resume.</Typography>
       <Button component="label" variant="contained" disabled={personaBuilderStatus === "pending"} startIcon={<UploadIcon />} sx={{p:"auto"}}>
         Upload

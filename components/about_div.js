@@ -3,7 +3,7 @@ import styles from "@/styles/Home.module.css"
 
 const AboutDiv = () => {
   return (
-    <Stack direction="column" className={styles.aboutStack} spacing={2}>
+    <Stack id = "aboutTab" direction="column" className={styles.aboutStack} spacing={2}>
       <Typography variant="body2">
         &#8226; This is an experiment in AI based job hunt.
         <div className={styles.spacingDiv}/>

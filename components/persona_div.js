@@ -85,7 +85,7 @@ const PersonaDiv = ({personaData, setPersonaData}) => {
 
   return (
     <>
-      <Stack direction="column" className={styles.personaStack}>
+      <Stack id = "personaTab" direction="column" className={styles.personaStack}>
         {displayJsx}
       </Stack>
       <CityConfirmationDialog
