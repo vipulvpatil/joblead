@@ -52,7 +52,7 @@ const Joblist = ({personaData}) => {
           setResultantJsx(
             <Grid item mobile={12}>
               <Typography variant="h4" className={styles.jobListStatus}>
-                {"no jobs found. :("}
+                {"no jobs found. (Note: we currently support very few locations in Europe. Please come back later)"}
               </Typography>
             </Grid>
           )
