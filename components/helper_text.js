@@ -5,7 +5,7 @@ const HelperText = () => {
     <>
       <Divider variant="middle">
         <Typography variant="subtitle">
-          Find a job matching your resume
+          {"Find your next job using AI"}
         </Typography>
       </Divider>
     </>
