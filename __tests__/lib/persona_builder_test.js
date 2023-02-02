@@ -78,4 +78,19 @@ describe("buildPersona", () => {
     expect(persona["soft"]).toStrictEqual(["Collaboration", "Problem Solving", "Communication", "Teamwork", "Leadership"])
     expect(persona["jobs"]).toStrictEqual(["Senior Software Engineer", "Software Engineer II", "Product Engineer", "Lead Front End Developer", "Front End Developer"])
   })
+
+  it("another realworld failing case", () => {
+    const personaData = "\\nName: Vipul Patil\\nEmail: vipulvpatil@gmail.com\\nPhone: (123)-456-7890\\nCity: Fort Worth\\nState: Texas\\nCountry: USA\\nTop 5 technical skills that are not in this profile:\\n1. Programming\\n2. Networking\\n3. Database Management\\n4. Cloud Computing\\n5. Cyber Security\\nTop 5 technical skills present in this profile:\\n1. Blockchain Analysis\\n2. Bi-lingual\\n3. Crypto\\n4. Licenses: 7, 63, SIE\\n5. Data Analysis and Visualization\\nTop 5 soft skills present in this profile:\\n1. Communication\\n2. Problem Solving\\n3. Collaboration\\n4. Adaptability\\n5. Time Management\\nTop 5 suitable designations when applying for a job:\\n1. Financial Operations Analyst\\n2. Blockchain Institutional Transactional Analyst\\n3. Financial Representative\\n4. Ultra High Net Worth & High Net Worth Representative\\n5. Public Relations"
+    const persona = buildPersona(personaData)
+    expect(persona["name"]).toBe("Vipul Patil")
+    expect(persona["email"]).toBe("vipulvpatil@gmail.com")
+    expect(persona["phone"]).toBe("(123)-456-7890")
+    expect(persona["city"]).toBe("Fort Worth")
+    expect(persona["state"]).toBe("Texas")
+    expect(persona["country"]).toBe("USA")
+    expect(persona["missing"]).toStrictEqual(["Programming","Networking","Database Management","Cloud Computing","Cyber Security",])
+    expect(persona["technical"]).toStrictEqual(["Blockchain Analysis","Bi-lingual","Crypto",])
+    expect(persona["soft"]).toStrictEqual(["Communication", "Problem Solving","Collaboration","Adaptability","Time Management",])
+    expect(persona["jobs"]).toStrictEqual(["Financial Operations Analyst","Blockchain Institutional Transactional Analyst","Financial Representative","Ultra High Net Worth & High Net Worth Representative","Public Relations",])
+  })
 })
